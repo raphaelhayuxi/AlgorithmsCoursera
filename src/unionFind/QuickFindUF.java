@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by rapha on 02/02/2018.
  */
 public class QuickFindUF {
-    private static int[] id;
+    private int[] id;
 
     /**
      * initialise the id array
