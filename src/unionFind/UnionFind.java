@@ -1,7 +1,7 @@
 package unionFind;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Union;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -72,19 +72,28 @@ public class UnionFind {
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        UnionFind uf = new UnionFind(N);
+        String[] files = new String[]{"tinyUF.txt","mediumUF.txt","largeUF.txt"};
 
-        while (scanner.hasNextInt()){
-            int p = scanner.nextInt();
-            int q = scanner.nextInt();
+        Scanner scanner = null;
+        for (String s : files){
+            try {
+                scanner = new Scanner(new File("src/unionFind/TestCase/" + s));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            int N = scanner.nextInt();
+            UF uf = new UF(N);
 
-            if (uf.connected(p, q)) continue;
-            uf.union(p, q);
-            System.out.println(p + " " + q);
+            while (scanner.hasNextInt()){
+                int p = scanner.nextInt();
+                int q = scanner.nextInt();
+
+                if (uf.connected(p, q)) continue;
+                uf.union(p, q);
+                System.out.println(p + " " + q);
+            }
+
+            System.out.println(uf.count() + " components");
         }
-
-        System.out.println(uf.count() + "components");
     }
 }
